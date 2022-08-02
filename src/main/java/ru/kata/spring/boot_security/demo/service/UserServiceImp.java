@@ -66,13 +66,12 @@ public class UserServiceImp implements UserService{
    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
       User user = userRepository.findUserByEmail(username)
               .orElseThrow(() -> new UsernameNotFoundException("Email " + username + " not found"));
-      return new org.springframework.security.core.userdetails
-              .User(user.getPassword(), user.getEmail(), getAuthorities(user));
+      return user;
    }
 
-   private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
-      String[] userRoles = user.getRoles().stream().map(role -> role.getRole()).toArray(String[]::new);
-      Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
-      return authorities;
-   }
+//   private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
+//      String[] userRoles = user.getRoles().stream().map(Role::getRoleName).toArray(String[]::new);
+//      Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
+//      return authorities;
+//   }
 }

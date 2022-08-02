@@ -10,48 +10,64 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return role;
+        return roleName;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(nullable = false)
-    private String role;
+    private String roleName;
 
     public Role() {}
 
-    public Role(String role) {
-        this.role = role;
+    public Role(String roleName) {
+        this.roleName = roleName;
     }
 
-    public Role(Long id, String role) {
+    public Role(int id, String role) {
         this.id = id;
-        this.role = role;
+        this.roleName = role;
     }
 
     public String getNoPrefix() {
         String pr = "ROLE_";
-        return role.substring(pr.length());
+        return roleName.substring(pr.length());
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getRole() { return role; }
+    public String getRoleName() { return roleName; }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String role) {
+        this.roleName = role;
     }
 
     @Override
     public String toString() {
-        return "role - " + role;
+        return "role - " + roleName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        if (!(id == role.getId())) return false;
+        return roleName.equals(role.roleName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id/100;
+        result = 31 * result + roleName.hashCode();
+        return result;
     }
 }

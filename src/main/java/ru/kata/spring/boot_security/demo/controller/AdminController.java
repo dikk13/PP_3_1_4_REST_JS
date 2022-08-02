@@ -9,11 +9,11 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
-public class UsersController {
+public class AdminController {
 
     private final UserService userService;
     @Autowired
-    public UsersController(UserService userService) {this.userService = userService;}
+    public AdminController(UserService userService) {this.userService = userService;}
 
     @GetMapping()
     public String getUsers(Model model) {

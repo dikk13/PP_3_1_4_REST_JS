@@ -4,9 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -25,14 +23,14 @@ public class User implements UserDetails {
    @Column(name = "email", nullable = false, unique = true)
    private String email;
 
-   @ManyToMany(fetch = FetchType.EAGER)
+   @ManyToMany
    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
          inverseJoinColumns = @JoinColumn(name = "role_id"))
-   private List<Role> roles;
+   private Set<Role> roles;
 
    public User() {}
 
-   public User(String username, String password, String email, List<Role> roles) {
+   public User(String username, String password, String email, Set<Role> roles) {
       this.username = username;
       this.password = password;
       this.email = email;
@@ -74,11 +72,11 @@ public class User implements UserDetails {
       this.password = password;
    }
 
-   public List<Role> getRoles() {
+   public Set<Role> getRoles() {
       return roles;
    }
 
-   public void setRoles(List<Role> roles) {
+   public void setRoles(Set<Role> roles) {
       this.roles = roles;
    }
 
@@ -100,6 +98,28 @@ public class User implements UserDetails {
    @Override
    public boolean isEnabled() {
       return true;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      User user = (User) o;
+      if (!(id == (user.getId()))) return false;
+      if (!username.equals(user.username)) return false;
+      if (!email.equals(user.email)) return false;
+      if (!password.equals(user.password)) return false;
+      return Objects.equals(roles, user.roles);
+   }
+
+   @Override
+   public int hashCode() {
+      int result = id/100;
+      result = 31 * result + username.hashCode();
+      result = 31 * result + email.hashCode();
+      result = 31 * result + password.hashCode();
+      result = 31 * result + (roles != null ? roles.hashCode() : 0);
+      return result;
    }
 
 }
