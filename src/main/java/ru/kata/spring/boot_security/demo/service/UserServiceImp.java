@@ -62,16 +62,14 @@ public class UserServiceImp implements UserService{
       return userRepository.findAll();
    }
 
-   @Override
-   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-      User user = userRepository.findUserByEmail(username)
-              .orElseThrow(() -> new UsernameNotFoundException("Email " + username + " not found"));
-      return user;
+   @Transactional
+   public User findByEmail(String email){
+      return userRepository.findUserByEmail(email);
    }
 
-//   private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
-//      String[] userRoles = user.getRoles().stream().map(Role::getRoleName).toArray(String[]::new);
-//      Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
-//      return authorities;
-//   }
+   @Override
+   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+      User user = userRepository.findUserByEmail(email);
+      return user;
+   }
 }
