@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Update</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}">
+  <!--<form th:method="post" th:action="@{'/users/' + ${user.id} + '/update'}" th:object="${user}">-->
+  <label for="id">Enter Id</label>
+  <input type="text" th:field="${user.id}" id="id">
+  <br/>
+  <label for="username">Enter UserName</label>
+  <input type="text" th:field="${user.username}" id="username"/>
+  <br/>
+  <label for="password">Enter password</label>
+  <input type="text" th:field="${user.password}" id="password"/>
+  <br/>
+  <label for="email">Enter Email</label>
+  <input type="text" th:field="${user.email}" id="email"/>
+
+  <br/>
+  <!--                    <ul>-->
+
+  <div class="form-group row">
+    <label class="col-4 col-form-label">Roles: </label>
+    <div class="col-8">
+      <th:block th:each="role: ${listRoles}">
+        <input type="checkbox" th:field="*{roles}"
+               th:text="${role.roleName}" th:value="${role.id}" class="m-2" />
+      </th:block>
+    </div>
+  </div>
+
+  <br/>
+  <input type="submit" value="Update User">
+</form>
+<form th:action="@{/logout}" method="post">
+  <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>
