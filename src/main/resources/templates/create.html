@@ -17,12 +17,18 @@
     <br/>
     <p>
         <label>Roles
-            <input type="checkbox" name="roleList"
-                   th:each="rol : ${roleList}"
-                   th:text="${rol.getNoPrefix()}"
-                   th:value="${rol.role}"
-                   th:field="*{roles}"
-            />
+<!--            <input type="checkbox" name="listRoles"-->
+<!--                   th:each="role : ${listRoles}"-->
+<!--                   th:text="${role.getNoPrefix()}"-->
+<!--                   th:value="${role.roleName}"-->
+<!--                   th:field="*{roles}"-->
+<!--            />-->
+
+            <th:block th:each="role: ${listRoles}">
+            <input type="checkbox" th:field="*{roles}"
+                   th:text="${role.roleName}" th:value="${role.id}" class="m-2" />
+            </th:block>
+
         </label>
     </p>
     <br/>

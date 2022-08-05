@@ -4,13 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
-
-import java.security.Principal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,12 +28,15 @@ public class AdminController {
     }
 
     @GetMapping("/create")
-    public String createNew(@ModelAttribute("user") User user) {
+    public String createNew(Model model, User user) {
+        model.addAttribute("listRoles", userService.listRoles());
         return "create";
     }
 
-    @PostMapping()
-    public String create(@ModelAttribute("user") User user) {
+    @PostMapping("/create")
+    public String create(@ModelAttribute("user") User user,
+                         @RequestParam(required = false, value = "roles") int[] roles) {
+        user.setRoles(userService.getRolesByIdArr(roles));
         userService.add(user);
         return "redirect:/admin";
     }
