@@ -14,7 +14,6 @@ import ru.kata.spring.boot_security.demo.userRepository.UserRepository;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -72,8 +71,7 @@ public class UserServiceImp implements UserService{
 
    @Override
    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-      User user = userRepository.findUserByEmail(email);
-      return user;
+      return userRepository.findUserByEmail(email);
    }
 
    @Override

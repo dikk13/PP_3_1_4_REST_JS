@@ -17,12 +17,6 @@
     <br/>
     <p>
         <label>Roles
-<!--            <input type="checkbox" name="listRoles"-->
-<!--                   th:each="role : ${listRoles}"-->
-<!--                   th:text="${role.getNoPrefix()}"-->
-<!--                   th:value="${role.roleName}"-->
-<!--                   th:field="*{roles}"-->
-<!--            />-->
 
             <th:block th:each="role: ${listRoles}">
             <input type="checkbox" th:field="*{roles}"
