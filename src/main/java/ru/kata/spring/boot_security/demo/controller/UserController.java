@@ -16,6 +16,6 @@ public class UserController {
     public String getUser(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("user", user);
         System.out.println(user.getEmail());
-        return "userPage";
+        return "user";
     }
 }

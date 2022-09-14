@@ -14,6 +14,12 @@ public class User implements UserDetails {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
 
+   @Column(name = "first_name", nullable = false, length = 20)
+   private String firstname;
+
+   @Column(name = "last_name", nullable = false, length = 20)
+   private String lastname;
+
    @Column(name = "user_name", nullable = false, length = 45)
    private String username;
 
