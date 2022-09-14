@@ -18,7 +18,7 @@ public class AdminController {
     @GetMapping()
     public String getUsers(Model model) {
         model.addAttribute("users", userService.listUsers());
-        return "users";
+        return "admin";
     }
 
     @GetMapping(value = "/{id}")
