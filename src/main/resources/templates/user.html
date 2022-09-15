@@ -55,7 +55,12 @@
   <body>
     
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand  col-lg-11 me-0 px-3" href="#">user@mail.ru with roles: User</a>
+      <a class="navbar-brand  col-lg-11 me-0 px-3" href="#">
+        <span th:text="${user.email}"></span> with roles:
+        <span th:each="msg : ${user.getRoles()}">
+          <span th:text="${msg.getNoPrefix()}"></span>
+        </span>
+      </a>
       <div class="navbar-nav">
         <div class="nav-item text-nowrap">
           <a class="nav-link px-3" href="/login">Logout</a>
@@ -94,12 +99,16 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td>1,001</td>
-                              <td>random</td>
-                              <td>data</td>
-                              <td>placeholder</td>
-                              <td>text</td>
-                              <td>role</td>
+                              <td th:text="${user.getId()}"></td>
+                              <td th:text="${user.firstname}"></td>
+                              <td th:text="${user.lastname}"></td>
+                              <td th:text="${user.age}"></td>
+                              <td th:text="${user.email}"></td>
+                              <td>
+                                <span th:each="msg : ${user.getRoles()}">
+                                  <span th:text="${msg.getNoPrefix()}"></span>
+                                </span>
+                              </td>
                             </tr>
                           </tbody>
                         </table>

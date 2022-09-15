@@ -20,8 +20,11 @@ public class User implements UserDetails {
    @Column(name = "last_name", nullable = false, length = 20)
    private String lastname;
 
-   @Column(name = "user_name", nullable = false, length = 45)
-   private String username;
+   @Column(name = "age", nullable = false)
+   private int age;
+
+//   @Column(name = "user_name", nullable = false, length = 45)
+//   private String username;
 
    @Column(nullable = false, length = 64)
    private String password;
@@ -36,8 +39,10 @@ public class User implements UserDetails {
 
    public User() {}
 
-   public User(String username, String password, String email, Set<Role> roles) {
-      this.username = username;
+   public User(String firstname, String lastname, int age, String password, String email, Set<Role> roles) {
+      this.firstname = firstname;
+      this.lastname = lastname;
+      this.age = age;
       this.password = password;
       this.email = email;
       this.roles = roles;
@@ -51,9 +56,33 @@ public class User implements UserDetails {
       this.id = id;
    }
 
-   public void setUsername(String username) {this.username = username;}
+   public String getFirstname() {
+      return firstname;
+   }
 
-   public String getUsername() {return username;}
+   public void setFirstname(String firstname) {
+      this.firstname = firstname;
+   }
+
+   public String getLastname() {
+      return lastname;
+   }
+
+   public void setLastname(String lastname) {
+      this.lastname = lastname;
+   }
+
+   public int getAge() {
+      return age;
+   }
+
+   public void setAge(int age) {
+      this.age = age;
+   }
+
+   //   public void setUsername(String username) {this.username = username;}
+//
+   public String getUsername() {return email;}
 
    public String getEmail() {
       return email;
@@ -111,7 +140,9 @@ public class User implements UserDetails {
       if (o == null || getClass() != o.getClass()) return false;
       User user = (User) o;
       if (!(id == (user.getId()))) return false;
-      if (!username.equals(user.username)) return false;
+      if (!firstname.equals(user.firstname)) return false;
+      if (!lastname.equals(user.lastname)) return false;
+      if (!(age == (user.age))) return false;
       if (!email.equals(user.email)) return false;
       if (!password.equals(user.password)) return false;
       return Objects.equals(roles, user.roles);
@@ -120,7 +151,9 @@ public class User implements UserDetails {
    @Override
    public int hashCode() {
       int result = id/100;
-      result = 31 * result + username.hashCode();
+      result = 31 * result + firstname.hashCode();
+      result = 31 * result + lastname.hashCode();
+      result = age/100 + result;
       result = 31 * result + email.hashCode();
       result = 31 * result + password.hashCode();
       result = 31 * result + (roles != null ? roles.hashCode() : 0);
