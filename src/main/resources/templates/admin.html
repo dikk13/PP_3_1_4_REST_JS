@@ -308,30 +308,30 @@
                         <h5>Add new user</h5>
                       </div>
                       <div class="card-body">
-                        <form name="new-user" action="">
+                        <form action="#" th:action="@{/admin/create}" th:object="${user}" method="post">
                           <div class="new-user">
-                            <label for="formControlInput1" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">First name</label>
-                            <input type="text" class="form-control" style="background-color:rgb(255, 228, 130);" id="formControlInput1" placeholder="111">
+                            <label for="Firstname" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">First name</label>
+                            <input type="text" class="form-control" style="background-color:rgb(255, 228, 130);" name="firstname" id="Firstname" placeholder="Enter first name">
                           </div>
                           <div class="new-user">
-                            <label for="formControlInput2" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Last Name</label>
-                            <input type="text" class="form-control" style="background-color:rgb(255, 228, 130);" id="formControlInput2" placeholder="111">
+                            <label for="Lastname" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Last Name</label>
+                            <input type="text" class="form-control" style="background-color:rgb(255, 228, 130);" name="lastname" id="Lastname" placeholder="Enter last name">
                           </div>
                           <div class="new-user">
-                            <label for="formControlInput3" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Age</label>
-                            <input type="text" class="form-control" id="formControlInput3" placeholder="111">
+                            <label for="Age" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Age</label>
+                            <input type="text" class="form-control" name="age" id="Age" placeholder="Enter age">
                           </div>
                           <div class="new-user">
-                            <label for="formControlInput4" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Email address</label>
-                            <input type="email" class="form-control" style="background-color:rgb(255, 228, 130);" id="formControlInput4" placeholder="111@mail.ru">
+                            <label for="Email" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Email address</label>
+                            <input type="email" class="form-control" style="background-color:rgb(255, 228, 130);" name="email" id="Email" placeholder="Enter email">
                           </div>
                           <div class="new-user">
-                            <label for="formControlInput5" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Password</label>
-                            <input type="password" class="form-control" id="formControlInput5" placeholder="...">
+                            <label for="Password" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Password</label>
+                            <input type="password" class="form-control" name="password" id="Password" placeholder="Enter password">
                           </div>
                           <div class="new-user">
-                            <label for="formControlInput6" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Role</label>
-                            <select class="form-select" size="2" id="formControlInput6">
+                            <label for="Role" class="form-label" style="display: flex; justify-content: center; font-weight: bold;">Role</label>
+                            <select required class="form-select" size="2" id="Role" multiple="multiple" name="roles">
                               <option value="1">Admin</option>
                               <option value="2">User</option>
                             </select>
