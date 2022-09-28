@@ -30,7 +30,7 @@ public class AdminController {
     }
 
     @GetMapping("/create")
-    public String createNew(Model model, User user) {
+    public String createNew(Model model) {
         model.addAttribute("listRoles", userService.listRoles());
         return "create";
     }
