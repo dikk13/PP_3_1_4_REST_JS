@@ -13,7 +13,6 @@ import ru.kata.spring.boot_security.demo.userRepository.RoleRepository;
 import ru.kata.spring.boot_security.demo.userRepository.UserRepository;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,13 +31,6 @@ public class UserServiceImp implements UserService{
                          RoleRepository roleRepository) {
       this.userRepository = userRepository;
       this.roleRepository = roleRepository;
-   }
-
-   @Transactional
-   @Override
-   public void saveUser(User user) {
-      user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
-      userRepository.save(user);
    }
 
    @Transactional
