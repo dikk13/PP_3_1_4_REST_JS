@@ -33,4 +33,15 @@ public class Controller {
         return user;
     }
 
+    @PostMapping("/users")
+    public User addUser(@RequestBody User user, @RequestBody int[] roles) {
+        user.setRoles(userService.getRolesByIdArr(roles));
+        userService.add(user);
+        return user;
+    }
+    @PutMapping("/users")
+    public User updateUser(@RequestBody User user) {
+        userService.add(user);
+        return user;
+    }
 }
