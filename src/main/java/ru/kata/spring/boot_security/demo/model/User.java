@@ -155,4 +155,10 @@ public class User implements UserDetails {
       return result;
    }
 
+   @Override
+   public String toString() {
+      return String.format("id : %d,\nfirstname : %s,\nlastname : %s,\nage : %d,\n" +
+              "password : %s,\nemail : %s,\nroles : %s",getId(),getFirstname(),getLastname(),getAge(),
+               getPassword(),getEmail(),getRoles());
+   }
 }

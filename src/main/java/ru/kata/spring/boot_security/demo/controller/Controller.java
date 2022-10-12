@@ -1,12 +1,9 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.exception_handling.NoSuchUserException;
-import ru.kata.spring.boot_security.demo.exception_handling.UserIncorrectData;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -34,8 +31,7 @@ public class Controller {
     }
 
     @PostMapping("/users")
-    public User addUser(@RequestBody User user, @RequestBody int[] roles) {
-        user.setRoles(userService.getRolesByIdArr(roles));
+    public User addUser(@RequestBody User user) {
         userService.add(user);
         return user;
     }
@@ -43,5 +39,14 @@ public class Controller {
     public User updateUser(@RequestBody User user) {
         userService.add(user);
         return user;
+    }
+    @DeleteMapping("/users/{id}")
+    public String deleteUser(@PathVariable int id){
+        User user = userService.getUser(id);
+        if (user == null) {
+            throw new NoSuchUserException("There is no user with ID = " + id + " in database");
+        }
+        userService.delete(id);
+        return "User with ID = " + id + " was deleted";
     }
 }
