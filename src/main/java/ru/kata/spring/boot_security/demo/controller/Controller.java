@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.exception_handling.NoSuchUserException;
-import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -21,6 +20,7 @@ public class Controller {
     public List<User> users() {
         return userService.listUsers();
     }
+
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable int id) {
         User user = userService.getUser(id);
@@ -35,11 +35,13 @@ public class Controller {
         userService.add(user);
         return user;
     }
+
     @PutMapping("/users")
     public User updateUser(@RequestBody User user) {
         userService.add(user);
         return user;
     }
+
     @DeleteMapping("/users/{id}")
     public String deleteUser(@PathVariable int id){
         User user = userService.getUser(id);
