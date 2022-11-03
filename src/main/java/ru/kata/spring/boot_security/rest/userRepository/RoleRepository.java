@@ -1,9 +1,8 @@
-package ru.kata.spring.boot_security.demo.userRepository;
+package ru.kata.spring.boot_security.rest.userRepository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.boot_security.rest.model.Role;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 

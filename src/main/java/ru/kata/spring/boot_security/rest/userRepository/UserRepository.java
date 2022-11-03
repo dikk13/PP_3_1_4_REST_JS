@@ -1,8 +1,8 @@
-package ru.kata.spring.boot_security.demo.userRepository;
+package ru.kata.spring.boot_security.rest.userRepository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.rest.model.User;
 
 
 public interface UserRepository extends JpaRepository<User, Integer> {

@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.service;
+package ru.kata.spring.boot_security.rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,10 +7,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.userRepository.RoleRepository;
-import ru.kata.spring.boot_security.demo.userRepository.UserRepository;
+import ru.kata.spring.boot_security.rest.model.Role;
+import ru.kata.spring.boot_security.rest.model.User;
+import ru.kata.spring.boot_security.rest.userRepository.RoleRepository;
+import ru.kata.spring.boot_security.rest.userRepository.UserRepository;
 
 import java.util.Arrays;
 import java.util.List;
