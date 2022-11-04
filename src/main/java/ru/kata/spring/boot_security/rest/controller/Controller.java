@@ -8,6 +8,7 @@ import ru.kata.spring.boot_security.rest.model.User;
 import ru.kata.spring.boot_security.rest.service.UserService;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -38,7 +39,7 @@ public class Controller {
         userService.add(user);
         return user;
     }
-    @PutMapping("/users/{id}")
+    @PatchMapping("/users/{id}")
     public User updateUser(@RequestBody User user) {
         userService.add(user);
         return user;

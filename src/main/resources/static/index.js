@@ -108,6 +108,7 @@ on(document, 'click', '.btnEdit', e => {
   editLastname.value = rowEdit.children[2].innerHTML;
   editAge.value = rowEdit.children[3].innerHTML;
   editEmail.value = rowEdit.children[4].innerHTML;
+  editPassword.value = '';
   modalEditUser.show();
 })
 
@@ -124,7 +125,7 @@ formEditUser.addEventListener('submit', e => {
     });
   })
   fetch(`${url}/${idForm}`,{
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'Content-Type':'application/json'
     },
@@ -138,6 +139,7 @@ formEditUser.addEventListener('submit', e => {
       roles: roles
     })  
   })
+  .then()
   .then(response => response.json())
   .then(data => {
     rowEdit.children[1].innerHTML = data.firstname;
@@ -146,6 +148,7 @@ formEditUser.addEventListener('submit', e => {
     rowEdit.children[4].innerHTML = data.email;
     rowEdit.children[5].innerHTML = data.roles.map(role => " " + role.noPrefix);
   })
+  modalEditUser.hide();
 })
 
 addUserForm.addEventListener('submit', (e) => {
