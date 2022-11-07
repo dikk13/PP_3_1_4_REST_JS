@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.rest.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,43 +21,39 @@ public class UserServiceImp implements UserService{
 
    private final UserRepository userRepository;
    private final RoleRepository roleRepository;
-   public PasswordEncoder bCryptPasswordEncoder() {
-      return new BCryptPasswordEncoder(12);
-   }
+   public PasswordEncoder passwordEncoder;
 
    @Autowired
    public UserServiceImp(UserRepository userRepository,
-                         RoleRepository roleRepository) {
+                         RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
       this.userRepository = userRepository;
       this.roleRepository = roleRepository;
+      this.passwordEncoder = passwordEncoder;
    }
 
    @Transactional
    @Override
-   public void delete(int id) {
+   public void deleteUser(int id) {
       userRepository.deleteById(id);
    }
 
    @Transactional
    @Override
-   public void update(int id, User user) {
-      user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
+   public void updateUser(int id, User user) {
+      user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
    }
 
-   @Transactional
    @Override
-   public User getUser(int id) {
+   public User getUserById(int id) {
       return userRepository.findById(id).orElse(null);
    }
 
-   @Transactional(readOnly = true)
    @Override
-   public List<User> listUsers() {
+   public List<User> getAllUsers() {
       return userRepository.findAll();
    }
 
-   @Transactional
    public User findByEmail(String email){
       return userRepository.findUserByEmail(email);
    }
@@ -67,15 +62,15 @@ public class UserServiceImp implements UserService{
    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
       return userRepository.findUserByEmail(email);
    }
-
+   @Transactional
    @Override
-   public void add(User user) {
-      user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
+   public void saveUser(User user) {
+      user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
    }
 
    @Override
-   public List<Role> listRoles() {
+   public List<Role> getRoles() {
       return roleRepository.findAll().stream().toList();
    }
 
