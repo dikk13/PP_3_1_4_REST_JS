@@ -7,7 +7,7 @@ import ru.kata.spring.boot_security.rest.model.User;
 import ru.kata.spring.boot_security.rest.service.UserService;
 
 import java.util.List;
-
+@org.springframework.web.bind.annotation.RestController
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/api")
 public class RestController {

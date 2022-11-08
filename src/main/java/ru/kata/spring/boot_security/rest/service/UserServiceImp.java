@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,7 @@ public class UserServiceImp implements UserService{
 
    @Autowired
    public UserServiceImp(UserRepository userRepository,
-                         RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+                         RoleRepository roleRepository, @Lazy PasswordEncoder passwordEncoder) {
       this.userRepository = userRepository;
       this.roleRepository = roleRepository;
       this.passwordEncoder = passwordEncoder;
