@@ -1,5 +1,8 @@
 package ru.kata.spring.boot_security.rest.configs;
 
+//import jakarta.validation.Validation;
+//import jakarta.validation.Validator;
+//import jakarta.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,4 +58,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
+
+//    @Bean
+//    public Validator getValidator() {
+//        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//        Validator validator = factory.getValidator();
+//        return validator;
+//    }
 }

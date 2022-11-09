@@ -4,6 +4,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 import java.util.*;
 
 @Entity
@@ -13,19 +17,19 @@ public class User implements UserDetails {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
-
+   @NotBlank(message = "Firstname cannot be null!")
    @Column(name = "first_name", nullable = false, length = 20)
    private String firstname;
-
+   @NotBlank(message = "Lastname cannot be null!")
    @Column(name = "last_name", nullable = false, length = 20)
    private String lastname;
-
+   @Positive(message = "Age should not be < 0!")
    @Column(name = "age", nullable = false)
    private int age;
-
+   @NotEmpty(message = "Password cannot be empty!")
    @Column(nullable = false, length = 64)
    private String password;
-
+   @Email(message = "Email should be valid!")
    @Column(name = "email", nullable = false, unique = true)
    private String email;
 
