@@ -1,5 +1,5 @@
 const url = 'http://localhost:8080/api/users';
-const usersList = document.querySelector('#idBodyAllUsers');
+let usersList = document.querySelector('#idBodyAllUsers');
 const authUserForm = document.querySelector('#idBodyUser');
 let result = '';
 
@@ -14,7 +14,7 @@ const age = document.getElementById('Age');
 const email = document.getElementById('Email');
 const password = document.getElementById('Password');
 
-const userList = (users) => {
+let userList = (users) => {
   users.forEach(user => {
     result += `
       <tr>
@@ -32,10 +32,14 @@ const userList = (users) => {
   usersList.innerHTML = result;
 }
 
-fetch(url)
-  .then(response => response.json())
-  .then(data => userList(data))
-  .catch(error => console.log(error));
+let getAllUsers = () => {
+  fetch(url)
+      .then(response => response.json())
+      .then(data => userList(data))
+      .catch(error => console.log(error));
+}
+
+getAllUsers();
 
 const authUser = (user) => {
   authUserForm.innerHTML = `
@@ -57,15 +61,14 @@ fetch('http://localhost:8080/api/authUser')
   .then(data => authUser(data))
   .catch(error => console.log(error));
 
-
-
 const on = (element, event, selector, handler) => {
   element.addEventListener(event, e => {
     if(e.target.closest(selector)){
       handler(e);
     }
   })
-} 
+}
+
 let idForm = 0;
 let row = '';
 
@@ -95,10 +98,11 @@ on(document, 'click', '.btnDelete', e => {
 formDeleteUser.addEventListener('submit', e => {
   e.preventDefault();
   row.closest('tr').remove();
-  fetch(url + '/' + idForm, {
+  fetch(`${url}/${idForm}`, {
     method: 'DELETE'
   })
 })
+
 let rowEdit = '';
 on(document, 'click', '.btnEdit', e => {
   rowEdit = e.target.parentNode.parentNode;
@@ -152,6 +156,7 @@ formEditUser.addEventListener('submit', e => {
 })
 
 addUserForm.addEventListener('submit', (e) => {
+  result = usersList.innerHTML;
   e.preventDefault();
   const select = document.getElementById('Role');
   const selected = [...select.options].filter(option => option.selected).map(option => option.value);

@@ -22,7 +22,7 @@ public class RestController {
     private final UserService userService;
 
     @Autowired
-    public RestController(UserService userService/*, Validator validator*/) {
+    public RestController(UserService userService) {
         this.userService = userService;
     }
 
@@ -38,8 +38,7 @@ public class RestController {
 
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable int id) {
-        User user = userService.getUserById(id);
-        return user;
+        return userService.getUserById(id);
     }
     @PostMapping("/users")
     public User saveUser(@Valid @RequestBody User user) {
@@ -53,7 +52,6 @@ public class RestController {
     }
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id){
-        User user = userService.getUserById(id);
         userService.deleteUser(id);
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)

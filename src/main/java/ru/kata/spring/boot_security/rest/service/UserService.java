@@ -11,11 +11,7 @@ import java.util.Set;
 public interface UserService extends UserDetailsService {
 
     void deleteUser(int id);
-    void updateUser(int id, User user);
     User getUserById(int id);
     List<User> getAllUsers();
-    User findByEmail(String email);
     void saveUser(User user);
-    List<Role> getRoles();
-    Set<Role> getRolesByIdArr(int[] idList);
 }
