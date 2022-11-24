@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.rest.model.User;
-import ru.kata.spring.boot_security.rest.userRepository.RoleRepository;
 import ru.kata.spring.boot_security.rest.userRepository.UserRepository;
 
 import java.util.List;
@@ -17,14 +16,12 @@ import java.util.List;
 public class UserServiceImp implements UserService{
 
    private final UserRepository userRepository;
-   private final RoleRepository roleRepository;
    public PasswordEncoder passwordEncoder;
 
    @Autowired
    public UserServiceImp(UserRepository userRepository,
-                         RoleRepository roleRepository, @Lazy PasswordEncoder passwordEncoder) {
+                         @Lazy PasswordEncoder passwordEncoder) {
       this.userRepository = userRepository;
-      this.roleRepository = roleRepository;
       this.passwordEncoder = passwordEncoder;
    }
 

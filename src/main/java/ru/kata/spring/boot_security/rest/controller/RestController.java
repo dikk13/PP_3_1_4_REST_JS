@@ -2,17 +2,14 @@ package ru.kata.spring.boot_security.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.rest.model.User;
 import ru.kata.spring.boot_security.rest.service.UserService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @org.springframework.web.bind.annotation.RestController
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -27,42 +24,33 @@ public class RestController {
     }
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> allUsers = userService.getAllUsers();
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
     @GetMapping("/authUser")
-    public User getAuthUser(@AuthenticationPrincipal User currentUser) {
-        return userService.getUserById(currentUser.getId());
+    public ResponseEntity<User> getAuthUser(@AuthenticationPrincipal User currentUser) {
+        return new ResponseEntity<>(userService.getUserById(currentUser.getId()), HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
+    public ResponseEntity<User> getUserById(@PathVariable int id) {
+        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
     @PostMapping("/users")
-    public User saveUser(@Valid @RequestBody User user) {
+    public ResponseEntity<User> saveUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
-        return user;
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
     @PatchMapping("/users/{id}")
-    public User updateUser(@Valid @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
-        return user;
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id){
         userService.deleteUser(id);
     }
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String,String> handlerValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String,String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName,errorMessage);
-        });
-        return errors;
-    }
+
 }
